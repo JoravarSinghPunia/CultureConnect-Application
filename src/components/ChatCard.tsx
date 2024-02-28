@@ -79,9 +79,12 @@ export default function ChatCard({ chat }: Props): JSX.Element {
     );
   }, [currentUser, profileData]);
 
+  if (isLoading) {
+    return <Spinner visible={true} />;
+  }
+
   return (
     <>
-      <Spinner visible={isLoading} />
       <Card style={{ margin: 10, padding: 10 }}>
         <Card.Content
           style={{
