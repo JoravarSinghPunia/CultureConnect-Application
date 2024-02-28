@@ -66,8 +66,12 @@ export default function ChatRoom() {
         setIsLoading(false);
       }
     }
-    fetchProfileData();
-  }, []);
+    if (chat_id) {
+      fetchProfileData();
+    } else {
+      setIsLoading(false);
+    }
+  }, [chat_id]);
 
   useEffect(() => {
     const fetchChatById = async () => {
@@ -161,9 +165,17 @@ export default function ChatRoom() {
       console.error("Error adding message:", error.message);
     }
   };
+
+  if (isLoading || !hostUserData) {
+    return (
+      <>
+        <Spinner visible={true} />
+        <Stack.Screen options={{ title: "Loading Chat" }} />
+      </>
+    );
+  }
   return (
     <>
-      <Spinner visible={isLoading} />
       <Stack.Screen
         options={{
           title: `Chatting with: ${hostUserData?.first_name} ${hostUserData?.second_name}`,

@@ -58,6 +58,9 @@ export default function Messages(): JSX.Element {
     return <Text>Error: {error}</Text>;
   }
 
+  // if (isLoading) {
+  //   return <Spinner visible={true} />;
+  // }
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -67,7 +70,6 @@ export default function Messages(): JSX.Element {
         />
         <Text style={styles.title}>Messages</Text>
         <View style={styles.separator} />
-        <Spinner visible={isLoading} />
         <View style={styles.chatContainer}>
           {allChats.map((chat) => (
             <ChatCard key={chat.id} chat={chat} />

@@ -64,13 +64,18 @@ export default function MessagesCard({
     fetchProfileData();
   }, []);
 
+  if (isLoading || !hostUserData || !profileData) {
+    return <Spinner visible={true} />;
+  }
+
   return (
     <>
-      <Spinner visible={isLoading} />
       <View>
         <View>
           <RemoteImage
-            path={myMessage ? profileData?.avatar_url : hostUserData.avatar_url}
+            path={
+              myMessage ? profileData?.avatar_url : hostUserData?.avatar_url
+            }
             fallback={defaultProfileImage}
             style={[styles.profileImage, myMessage ? styles.currentUser : null]}
             bucket="avatars"
@@ -78,7 +83,7 @@ export default function MessagesCard({
           <Text style={[styles.user, myMessage ? styles.currentUser : null]}>
             {myMessage
               ? `${profileData?.first_name} ${profileData?.second_name}`
-              : `${hostUserData.first_name} ${hostUserData.second_name}`}
+              : `${hostUserData?.first_name} ${hostUserData?.second_name}`}
           </Text>
         </View>
         <View
